@@ -55,9 +55,9 @@ function SlabDetailPage() {
     <div className="p-6 max-w-5xl mx-auto">
       <button
         onClick={() => navigate(-1)}
-        className="mb-4 text-blue-600 underline"
+        className="mb-4 text-white bg-gray-600"
       >
-        ← Back
+        Back
       </button>
       <div className="grid md:grid-cols-2 gap-6">
         <img

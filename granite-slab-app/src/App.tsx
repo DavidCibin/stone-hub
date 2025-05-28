@@ -3,13 +3,13 @@ import Home from "./pages/Home";
 import Inventory from "./pages/Inventory";
 import SlabDetailPage from "./pages/SlabDetailPage";
 // import Submit from "./pages/Submit";
-// import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar";
 // import Footer from "./components/Footer";
 
 function App() {
   return (
     <div className="min-h-screen flex flex-col">
-      {/* <Navbar /> */}
+      <Navbar />
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
