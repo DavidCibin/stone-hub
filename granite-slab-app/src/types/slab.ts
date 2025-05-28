@@ -13,5 +13,6 @@ export interface Slab {
   pricePerSqFt: number;
   imageUrl: string;
   available: boolean;
+  colors: string[];
   description?: string;
 }
