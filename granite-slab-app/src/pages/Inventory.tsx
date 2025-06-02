@@ -64,7 +64,9 @@ export default function Inventory() {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl text-teal-500 font-bold mb-4">Available Slabs</h1>
+      <h1 className="text-2xl text-teal-500 font-bold mb-10">
+        Available Slabs
+      </h1>
       <SlabGrid slabs={filteredSlabs} />
     </div>
   );
