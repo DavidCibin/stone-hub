@@ -20,7 +20,11 @@ function Navbar() {
     <header className="fixed top-0 left-0 w-full bg-gray-800 shadow-lg z-30 h-20 text-teal-500">
       <div className="mx-auto h-full px-4 py-3 flex items-center justify-between">
         <Link to="/">
-          <img src={nhsLogo} alt="Natural Stone Logo" className="h-12" />
+          <img
+            src={nhsLogo}
+            alt="Natural Stone Logo"
+            className="h-13 hover:opacity-90"
+          />
         </Link>
 
         {isMobile && (
