@@ -6,12 +6,12 @@
     @apply min-h-screen bg-white text-gray-900 antialiased font-sans;
   }
 
-  a {
+  /* a {
     @apply text-blue-600 hover:text-blue-800 font-medium;
-  }
+  } */
 
   button {
-    @apply px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition;
+    @apply px-4 py-1 bg-green-800 text-white font-medium rounded hover:bg-green-700 transition;
   }
 }
 
@@ -33,4 +33,31 @@
   .transition-fast {
     @apply transition duration-150 ease-in-out;
   }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+body, html, #root {
+  overflow: hidden;
+  height: 100%;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    background-image: url("../public/images/caret-down.svg");
+    background-repeat: no-repeat;
+    background-position-x: 0px;
+    background-position-y: 10px;
+    margin-right: 0;
+    padding: 0 0px 0 20px;
+    background-size: 8px;
 }

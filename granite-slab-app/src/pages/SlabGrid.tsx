@@ -1,18 +1,18 @@
-import type { Slab } from "../types/slab";
 import SlabCard from "./SlabCard";
+import { type Slabs } from "../hooks/apiHook";
 
-interface Props {
-  slabs: Slab[];
-}
+type SlabGridProps = {
+  slabs: Slabs[];
+};
 
-function SlabGrid({ slabs }: Props) {
+const SlabGrid = ({ slabs }: SlabGridProps) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {slabs.map((slab) => (
-        <SlabCard key={slab.id} slab={slab} />
+      {slabs.map((slab: Slabs) => (
+        <SlabCard key={slab.slug} slab={slab} />
       ))}
     </div>
   );
-}
+};
 
 export default SlabGrid;

@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import closeIcon from "../../public/images/close.png";
 import menuIcon from "../../public/images/menu.png";
-import { useScreenContext } from "../context/appContext";
+import nhsLogo from "../../public/images/nsh-logo.svg";
+import { useScreenContext } from "../context/AppContext";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,10 +17,10 @@ function Navbar() {
   }, [isMobile]);
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-white border-b shadow-md z-50 h-20">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        <Link to="/" className="text-xl font-bold text-gray-800">
-          SlabStore
+    <header className="fixed top-0 left-0 w-full bg-gray-800 shadow-lg z-30 h-20">
+      <div className="mx-auto h-full px-4 py-3 flex items-center justify-between">
+        <Link to="/">
+          <img src={nhsLogo} alt="Natural Stone Logo" className="h-12" />
         </Link>
 
         {isMobile && (
@@ -35,11 +36,14 @@ function Navbar() {
         )}
 
         <nav className="hidden lg:flex space-x-6">
-          <Link to="/" className="hover:text-blue-600">
+          <Link to="/" className="text-gray-700 hover:text-gray-900">
             Home
           </Link>
-          <Link to="/inventory" className="hover:text-blue-600">
+          <Link to="/inventory" className="text-gray-700 hover:text-gray-900">
             Inventory
+          </Link>
+          <Link to="/contact" className="text-gray-700 hover:text-gray-900">
+            Contact
           </Link>
         </nav>
       </div>
@@ -63,6 +67,13 @@ function Navbar() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Inventory
+              </Link>
+              <Link
+                to="/contact"
+                onClick={() => setIsMenuOpen(false)}
+                className="block text-gray-700"
+              >
+                Contact
               </Link>
             </li>
           </ul>

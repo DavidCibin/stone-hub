@@ -1,43 +1,14 @@
 import { useParams, useNavigate } from "react-router-dom";
-import type { Slab } from "../types/slab";
-
-const mockSlabs: Slab[] = [
-  {
-    id: "1",
-    name: "Alaska White",
-    material: "Granite",
-    finish: "Polished",
-    thickness: 3,
-    dimensions: { width: 200, height: 200 },
-    country: "Brazil",
-    useCases: ["Countertop", "Backsplash"],
-    pricePerSqFt: 45,
-    imageUrl: "https://picsum.photos/200",
-    available: true,
-    description: "Elegant white granite with gray veining.",
-  },
-  {
-    id: "2",
-    name: "Black Galaxy",
-    material: "Granite",
-    finish: "Polished",
-    thickness: 2,
-    dimensions: { width: 200, height: 200 },
-    country: "India",
-    useCases: ["Countertop", "Floor"],
-    pricePerSqFt: 55,
-    imageUrl: "https://picsum.photos/200",
-    available: true,
-    description: "Deep black granite with golden specks.",
-  },
-];
+import { useSlabDetails } from "../hooks/apiHook";
 
 function SlabDetailPage() {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const slab = mockSlabs.find((s) => s.id === id);
+  const { param } = useParams<{ param: string }>();
+  const { data: slabs } = useSlabDetails(param || "");
+  const [name, material] = (param ?? "").split("&");
 
-  if (!slab) {
+  const navigate = useNavigate();
+
+  if (!slabs.length) {
     return (
       <div className="p-6">
         <p className="text-red-600">Slab not found.</p>
@@ -53,50 +24,81 @@ function SlabDetailPage() {
 
   return (
     <div className="p-6 max-w-5xl mx-auto">
-      <button
-        onClick={() => navigate(-1)}
-        className="mb-4 text-white bg-gray-600"
-      >
-        Back
-      </button>
-      <div className="grid md:grid-cols-2 gap-6">
-        <img
-          src={slab.imageUrl}
-          alt={slab.name}
-          className="w-full h-auto object-cover rounded shadow"
-        />
-        <div>
-          <h1 className="text-3xl font-bold mb-2">{slab.name}</h1>
-          <p className="text-gray-700 mb-4">{slab.description}</p>
-          <ul className="text-sm space-y-1">
-            <li>
-              <strong>Material:</strong> {slab.material}
-            </li>
-            <li>
-              <strong>Finish:</strong> {slab.finish}
-            </li>
-            <li>
-              <strong>Thickness:</strong> {slab.thickness} cm
-            </li>
-            <li>
-              <strong>Dimensions:</strong> {slab.dimensions.width}″ x{" "}
-              {slab.dimensions.height}″
-            </li>
-            <li>
-              <strong>Country of Origin:</strong> {slab.country}
-            </li>
-            <li>
-              <strong>Use Cases:</strong> {slab.useCases.join(", ")}
-            </li>
-            <li>
-              <strong>Price:</strong> ${slab.pricePerSqFt.toFixed(2)} / sq. ft
-            </li>
-            <li>
-              <strong>Availability:</strong>{" "}
-              {slab.available ? "In Stock" : "Out of Stock"}
-            </li>
-          </ul>
+      <div className="flex flex-col gap-10">
+        <div className="grid md:grid-cols-2 gap-6">
+          <button onClick={() => navigate(-1)} className="text-white w-fit">
+            Back
+          </button>
+          <div className="flex gap-2 items-baseline w-full">
+            <h1 className="uppercase text-2xl font-bold">{name}</h1>
+            <p className="text-lg text-gray-700">{material}</p>
+          </div>
         </div>
+        {slabs.map((slab) => (
+          <div key={slab.SlabID} className="grid md:grid-cols-2 gap-6">
+            <img
+              src={`https://slabcloud.com/slabs/v2/${slab.SlabID.toLowerCase()}.jpg`}
+              alt={slab.Name}
+              className="w-full h-auto object-cover rounded"
+            />
+            <div>
+              <div>
+                <div className="table-row">
+                  <div className="table-cell border-b-gray-300 border-b font-medium pb-1">
+                    Finish:
+                  </div>
+                  <div className="table-cell border-b-gray-300 border-b pl-5">
+                    {slab.Finish}
+                  </div>
+                </div>
+                <div className="table-row">
+                  <div className="table-cell border-b-gray-300 border-b font-medium pb-1">
+                    Thickness:
+                  </div>
+                  <div className="table-cell border-b-gray-300 border-b pl-5 pt-2">
+                    {slab.Thickness_Nominal}
+                  </div>
+                </div>
+                <div className="table-row">
+                  <div className="table-cell border-b-gray-300 border-b font-medium pb-1">
+                    Dimensions:
+                  </div>
+                  <div className="table-cell border-b-gray-300 border-b pl-5 pt-2">{`${Math.round(slab.Length_Actual * 39.3701)}″ x ${Math.round(slab.Width_Actual * 39.3701)}″`}</div>
+                </div>
+                <div className="table-row">
+                  <div className="table-cell border-b-gray-300 border-b font-medium pb-1">
+                    Total Area:
+                  </div>
+                  <div className="table-cell border-b-gray-300 border-b pl-5 pt-2">{`${Math.round(slab.UsableArea * 10.7639)} ft²`}</div>
+                </div>
+                <div className="table-row">
+                  <div className="table-cell border-b-gray-300 border-b font-medium pb-1">
+                    Color Tones:
+                  </div>
+                  <div className="table-cell border-b-gray-300 border-b pl-5 pt-2 capitalize">
+                    {slab.colors.map((color) => color).join(", ")}
+                  </div>
+                </div>
+                <div className="table-row">
+                  <div className="table-cell border-b-gray-300 border-b font-medium pb-1">
+                    Item Id:
+                  </div>
+                  <div className="table-cell border-b-gray-300 border-b pl-5 pt-2">
+                    {slab.InventoryID}
+                  </div>
+                </div>
+                <div className="table-row">
+                  <div className="table-cell font-medium pb-1">
+                    Country of Origin:
+                  </div>
+                  <div className="table-cell pl-5 pt-2">
+                    {slab.Origin ? slab.Origin : "--"}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

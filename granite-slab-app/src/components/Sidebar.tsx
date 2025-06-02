@@ -1,9 +1,9 @@
-import { useSidebar } from "../context/SidebarContext";
+import { useMainContext } from "../context/MainContext";
 
 function Sidebar() {
-  const { content } = useSidebar();
+  const { sidebarContent } = useMainContext();
 
-  return <div className="p-4">{content}</div>;
+  return <div className="p-4">{sidebarContent}</div>;
 }
 
 export default Sidebar;

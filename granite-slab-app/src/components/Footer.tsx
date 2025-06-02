@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="bg-gray-100 text-center text-sm text-gray-600 py-4 border-t">
+    <footer className="relative z-20 bg-gray-800 text-center text-sm text-white py-4 mt-auto">
       <p>
         &copy; {new Date().getFullYear()} GraniteSlabs. All rights reserved.
       </p>

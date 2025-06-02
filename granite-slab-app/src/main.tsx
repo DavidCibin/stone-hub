@@ -4,14 +4,14 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import "./index.css";
 
-import { SidebarProvider } from "./context/SidebarProvider.tsx";
+import { MainProvider } from "./context/MainProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <SidebarProvider>
+      <MainProvider>
         <App />
-      </SidebarProvider>
+      </MainProvider>
     </BrowserRouter>
   </StrictMode>,
 );

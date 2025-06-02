@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
-import { AppContext } from "./appContext";
+import { AppContext } from "./AppContext";
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [screenWidth, setScreenWidth] = useState(0);
