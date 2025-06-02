@@ -13,6 +13,7 @@ import ErrorBar from "./components/ErrorBar";
 import { AppProvider } from "./context/appProvider";
 import { useMainContext } from "./context/MainContext";
 import { useEffect } from "react";
+import Contact from "./pages/Contact";
 
 // Inside App()
 
@@ -45,6 +46,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/inventory" element={<Inventory />} />
               <Route path="/inventory/:param" element={<SlabDetailPage />} />
+              <Route path="/contact" element={<Contact />} />
             </Routes>
             <Footer />
           </main>

@@ -11,15 +11,11 @@
   } */
 
   button {
-    @apply px-4 py-1 bg-green-800 text-white font-medium rounded hover:bg-green-700 transition;
+    @apply px-4 py-1 bg-teal-600 text-white font-medium rounded hover:bg-teal-700 transition;
   }
 }
 
 @layer components {
-  .btn-primary {
-    @apply px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition;
-  }
-
   .card {
     @apply p-4 border rounded shadow bg-white;
   }
