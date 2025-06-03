@@ -1,10 +1,20 @@
+import os
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, model_validator
 from typing import List, Optional
 import httpx
 
 app = FastAPI()
+
+# Serve static files (frontend build)
+app.mount("/", StaticFiles(directory="dist", html=True), name="static")
+
+@app.get("/")
+async def serve_index():
+    return FileResponse(os.path.join("dist", "index.html"))
 
 # CORS config
 origins = [
