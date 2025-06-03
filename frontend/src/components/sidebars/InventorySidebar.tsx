@@ -1,6 +1,5 @@
 import { type Dispatch, type SetStateAction } from "react";
 import { useMainContext } from "../../context/MainContext";
-import arrowDown from "../../../public/images/caret-down.svg";
 
 type Filters = {
   name: string;

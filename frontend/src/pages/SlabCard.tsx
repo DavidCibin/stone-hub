@@ -1,4 +1,3 @@
-import type { Slab } from "../types/slab";
 import { Link } from "react-router-dom";
 import { type Slabs } from "../hooks/apiHook";
 

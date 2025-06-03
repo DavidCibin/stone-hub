@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 import Loading from "./components/Loading";
 import ErrorBar from "./components/ErrorBar";
 
-import { AppProvider } from "./context/appProvider";
+import { AppProvider } from "./context/AppProvider";
 import { useMainContext } from "./context/MainContext";
 import { useEffect } from "react";
 import Contact from "./pages/Contact";
