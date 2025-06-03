@@ -1,17 +1,13 @@
-# Use a lightweight Python image
 FROM python:3.11-slim
 
-# Set working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# ✅ Copy everything from current (backend/) dir
+# Copy backend code into the container
 COPY . .
 
-# Install required Python packages
+# Install dependencies
 RUN pip install --no-cache-dir fastapi uvicorn httpx pydantic
 
-# Expose the port FastAPI will run on
-EXPOSE 8000
-
-# Run the FastAPI app
+# Command to run the app
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
