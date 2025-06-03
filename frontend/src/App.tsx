@@ -43,7 +43,7 @@ function App() {
           )}
           <main className="flex flex-col flex-grow h-full overflow-unset lg:overflow-y-auto">
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="*" element={<Home />} />
               <Route path="/inventory" element={<Inventory />} />
               <Route path="/inventory/:param" element={<SlabDetailPage />} />
               <Route path="/contact" element={<Contact />} />
