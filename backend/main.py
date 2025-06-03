@@ -19,6 +19,7 @@ origins = [
     "http://127.0.0.1",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:80",
+    "https://stonehub.davidcibin.com"
 ]
 
 app.add_middleware(

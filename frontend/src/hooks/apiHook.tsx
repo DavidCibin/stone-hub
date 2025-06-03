@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useMainContext } from "../context/MainContext";
+import { API_BASE_URL } from "../config"; // add this line
 
 export interface Slabs {
   Material: string;
@@ -45,7 +46,7 @@ export function useSlabs() {
       try {
         setIsLoading(true);
         setState((prev) => ({ ...prev }));
-        const response = await fetch("http://localhost:8000/slabs");
+        const response = await fetch(`${API_BASE_URL}/slabs`);
         if (!response.ok) {
           setError({
             errorMessage: `HTTP error! status: ${response.status}`,
@@ -103,7 +104,7 @@ export function useSlabDetails(param: string) {
         });
 
         const response = await fetch(
-          `http://localhost:8000/slab-details?${query.toString()}`,
+          `${API_BASE_URL}/slab-details?${query.toString()}`,
         );
 
         if (!response.ok) {
