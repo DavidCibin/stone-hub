@@ -1,18 +1,19 @@
+# render.yaml
 services:
   - type: web
-    name: frontend
+    name: stone-frontend
     env: docker
-    plan: free
     dockerfilePath: ./frontend/Dockerfile
-    buildCommand: npm install && npm run build
-    startCommand: nginx -g 'daemon off;'
-    envVars:
-      - key: NODE_ENV
-        value: production
+    plan: free
+    buildFilter:
+      paths:
+        - frontend/**
 
   - type: web
-    name: backend
+    name: stone-backend
     env: docker
-    plan: free
     dockerfilePath: ./backend/Dockerfile
-    startCommand: uvicorn main:app --host 0.0.0.0 --port 8000
+    plan: free
+    buildFilter:
+      paths:
+        - backend/**
