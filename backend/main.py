@@ -9,13 +9,6 @@ import httpx
 
 app = FastAPI()
 
-# Serve static files (frontend build)
-app.mount("/", StaticFiles(directory="dist", html=True), name="static")
-
-@app.get("/")
-async def serve_index():
-    return FileResponse(os.path.join("dist", "index.html"))
-
 # CORS config
 origins = [
     "http://localhost:5173", 
@@ -124,3 +117,12 @@ async def get_slab_details(
         raise HTTPException(status_code=502, detail=f"External API error: {str(e)}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to fetch slab details: {str(e)}")
+
+
+
+# Serve static files (frontend build)
+app.mount("/", StaticFiles(directory="dist", html=True), name="static")
+
+@app.get("/")
+async def serve_index():
+    return FileResponse(os.path.join("dist", "index.html"))
