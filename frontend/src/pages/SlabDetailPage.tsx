@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useSlabDetails } from "../hooks/apiHook";
+import { useMainContext } from "../context/MainContext";
 
 function SlabDetailPage() {
   const { param } = useParams<{ param: string }>();
@@ -7,6 +8,11 @@ function SlabDetailPage() {
   const [name, material] = (param ?? "").split("&");
 
   const navigate = useNavigate();
+  const { isLoading } = useMainContext();
+
+  if (isLoading) {
+    return null;
+  }
 
   if (!slabs.length) {
     return (
