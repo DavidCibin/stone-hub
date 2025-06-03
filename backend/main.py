@@ -128,3 +128,9 @@ app.mount("/", StaticFiles(directory="dist", html=True), name="static")
 @app.get("/")
 async def serve_index():
     return FileResponse(os.path.join("dist", "index.html"))
+
+from fastapi.requests import Request
+
+@app.get("/{full_path:path}")
+async def catch_all(full_path: str):
+    return FileResponse(os.path.join("dist", "index.html"))
