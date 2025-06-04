@@ -16,7 +16,7 @@ interface SlabState {
   data: Slabs[];
 }
 
-export interface SlabDetail {
+export interface SlabDetails {
   SlabID: string;
   InventoryID: string;
   UsableArea: number;
@@ -33,8 +33,8 @@ export interface SlabDetail {
   colors: string[];
 }
 
-interface SlabDetailState {
-  data: SlabDetail[];
+interface SlabDetailstate {
+  data: SlabDetails[];
 }
 
 export function useSlabs() {
@@ -58,8 +58,8 @@ export function useSlabs() {
         const materials = [
           ...new Set(
             data
-              .filter((slab: SlabDetail) => slab.Material)
-              .map((slab: SlabDetail) => slab.Material.toLowerCase()),
+              .filter((slab: SlabDetails) => slab.Material)
+              .map((slab: SlabDetails) => slab.Material.toLowerCase()),
           ),
         ] as string[];
         setState({ data });
@@ -87,7 +87,7 @@ export function useSlabs() {
 export function useSlabDetails(param: string) {
   const { setIsLoading, setError } = useMainContext();
 
-  const [state, setState] = useState<SlabDetailState>({
+  const [state, setState] = useState<SlabDetailstate>({
     data: [],
   });
 

@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useSlabDetails } from "../hooks/apiHook";
 import { useMainContext } from "../context/MainContext";
 
-function SlabDetailPage() {
+function SlabDetailsPage() {
   const { param } = useParams<{ param: string }>();
   const { data: slabs } = useSlabDetails(param || "");
   const [name, material] = (param ?? "").split("&");
@@ -110,4 +110,4 @@ function SlabDetailPage() {
   );
 }
 
-export default SlabDetailPage;
+export default SlabDetailsPage;

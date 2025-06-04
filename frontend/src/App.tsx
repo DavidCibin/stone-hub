@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Inventory from "./pages/Inventory";
-import SlabDetailPage from "./pages/SlabDetailPage";
+import SlabDetailsPage from "./pages/SlabDetailsPage";
 
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
@@ -45,7 +45,7 @@ function App() {
             <Routes>
               <Route path="*" element={<Home />} />
               <Route path="/inventory" element={<Inventory />} />
-              <Route path="/inventory/:param" element={<SlabDetailPage />} />
+              <Route path="/inventory/:param" element={<SlabDetailsPage />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>
             <Footer />
