@@ -1,16 +1,15 @@
 import os
-<<<<<<< HEAD
 from fastapi import FastAPI
-=======
-from fastapi.requests import Request
-from fastapi import FastAPI, HTTPException, Query
->>>>>>> 944f8ad655626de5c870b7bc94fe58e45ec7e058
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.requests import Request
+from db.base import Base
+from db.session import engine
 
-from api import inventory;
+from api import inventory, user, slab;
+
+Base.metadata.create_all(bind=engine)
+
 
 app = FastAPI()
 
@@ -31,6 +30,8 @@ app.add_middleware(
 
 # ✅ Include routers
 app.include_router(inventory.router)
+app.include_router(user.router)
+app.include_router(slab.router)
 
 # ✅ Serve frontend
 app.mount("/", StaticFiles(directory="dist", html=True), name="static")
