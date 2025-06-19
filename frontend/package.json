@@ -18,6 +18,7 @@
     "@tailwindcss/vite": "^4.1.7",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-modal-image": "^2.6.0",
     "react-router-dom": "^6.30.1",
     "tailwindcss": "^4.1.7"
   },
@@ -27,6 +28,7 @@
     "@testing-library/react": "^16.3.0",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
+    "@types/react-modal-image": "^2.6.4",
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^4.4.1",
     "@vitest/coverage-v8": "^3.1.4",

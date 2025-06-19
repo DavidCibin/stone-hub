@@ -15,6 +15,8 @@ export type MainContextType = {
   setSidebarContent: (content: ReactNode | null) => void;
   error: ErrorState;
   setError: (error: ErrorState) => void;
+  cartItems: string[];
+  setCartItems: (items: string[] | ((prev: string[]) => string[])) => void;
 };
 
 export const MainContext = createContext<MainContextType>({
@@ -26,6 +28,8 @@ export const MainContext = createContext<MainContextType>({
   setSidebarContent: () => {},
   error: { errorMessage: "", showError: false },
   setError: () => {},
+  cartItems: [],
+  setCartItems: () => {},
 });
 
 export const useMainContext = () => useContext(MainContext);

@@ -5,12 +5,15 @@ import App from "./App.tsx";
 import "./index.css";
 
 import { MainProvider } from "./context/MainProvider.tsx";
+import { AppProvider } from "./context/AppProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <MainProvider>
-        <App />
+        <AppProvider>
+          <App />
+        </AppProvider>
       </MainProvider>
     </BrowserRouter>
   </StrictMode>,

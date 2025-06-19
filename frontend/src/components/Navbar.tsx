@@ -4,10 +4,12 @@ import closeIcon from "../../public/images/close.svg";
 import menuIcon from "../../public/images/menu.svg";
 import nhsLogo from "../../public/images/nsh-logo.svg";
 import { useScreenContext } from "../context/AppContext";
+import { useMainContext } from "../context/MainContext";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isMobile } = useScreenContext();
+  const { cartItems } = useMainContext();
 
   // Auto-close menu when switching from mobile to desktop
   useEffect(() => {
@@ -15,6 +17,10 @@ function Navbar() {
       setIsMenuOpen(false);
     }
   }, [isMobile]);
+
+  useEffect(() => {
+    console.log("Cart items updated:", cartItems);
+  }, [cartItems]);
 
   return (
     <header className="fixed top-0 left-0 w-full bg-gray-800 shadow-lg z-30 h-20 text-teal-500">
@@ -62,6 +68,17 @@ function Navbar() {
           >
             Contact
           </Link>
+          <Link
+            to="/cart"
+            className="hover:text-teal-700 hover:border-b hover:border-teal-700 flex items-center relative mr-6"
+          >
+            Cart
+            {cartItems.length > 0 && (
+              <span className="ml-1 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center -top-1 -right-4.5 absolute">
+                {cartItems.length}
+              </span>
+            )}
+          </Link>
         </nav>
       </div>
 
@@ -91,6 +108,20 @@ function Navbar() {
                 className="block py-2 hover:text-teal-700"
               >
                 Contact
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/cart"
+                onClick={() => setIsMenuOpen(false)}
+                className="py-2 hover:text-teal-700 flex items-center relative mr-6"
+              >
+                Cart
+                {cartItems.length > 0 && (
+                  <span className="ml-1 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center -top-1 -right-4.5 absolute">
+                    {cartItems.length}
+                  </span>
+                )}
               </Link>
             </li>
           </ul>

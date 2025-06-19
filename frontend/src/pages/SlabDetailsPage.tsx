@@ -1,6 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useSlabDetails } from "../hooks/apiHook";
 import { useMainContext } from "../context/MainContext";
+import useCart from "../hooks/useCart";
+import ModalImage from "react-modal-image";
 
 function SlabDetailsPage() {
   const { param } = useParams<{ param: string }>();
@@ -9,6 +11,15 @@ function SlabDetailsPage() {
 
   const navigate = useNavigate();
   const { isLoading } = useMainContext();
+  const { addToCart, isInCart, removeFromCart } = useCart();
+
+  const handleCartItems = (slabId: string) => {
+    if (isInCart(slabId)) {
+      removeFromCart(slabId);
+    } else {
+      addToCart(slabId);
+    }
+  };
 
   if (isLoading) {
     return null;
@@ -42,10 +53,9 @@ function SlabDetailsPage() {
         </div>
         {slabs.map((slab) => (
           <div key={slab.SlabID} className="grid md:grid-cols-2 gap-6">
-            <img
-              src={`https://slabcloud.com/slabs/v2/${slab.SlabID.toLowerCase()}.jpg`}
-              alt={slab.Name}
-              className="w-full h-auto object-cover rounded"
+            <ModalImage
+              small={`https://slabcloud.com/slabs/v2/${slab.SlabID.toLowerCase()}.jpg`}
+              large={`https://slabcloud.com/slabs/v2/${slab.SlabID.toLowerCase()}.jpg`}
             />
             <div>
               <div>
@@ -100,6 +110,18 @@ function SlabDetailsPage() {
                   <div className="table-cell pl-5 pt-2">
                     {slab.Origin ? slab.Origin : "--"}
                   </div>
+                </div>
+                <div className="mt-4">
+                  <button
+                    onClick={() => handleCartItems(slab.SlabID)}
+                    className={`px-6 py-2 rounded-md text-white font-semibold ${
+                      isInCart(slab.SlabID)
+                        ? "bg-gray-400 hover:bg-gray-500"
+                        : "bg-green-600 hover:bg-green-700"
+                    }`}
+                  >
+                    {isInCart(slab.SlabID) ? "Remove from Cart" : "Add to Cart"}
+                  </button>
                 </div>
               </div>
             </div>
