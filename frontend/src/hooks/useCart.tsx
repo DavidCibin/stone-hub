@@ -1,6 +1,6 @@
 // src/hooks/useCart.tsx
-import { useCallback } from 'react'; // No need for useState or initial useEffect here
-import { useMainContext } from '../context/MainContext';
+import { useCallback } from "react"; // No need for useState or initial useEffect here
+import { useMainContext } from "../context/MainContext";
 
 // CART_STORAGE_KEY can stay here if only useCart cares about it directly,
 // but since MainProvider now uses it, it's better to define it in a shared place
@@ -14,12 +14,14 @@ function useCart() {
 
   // No useEffect to sync to localStorage here either, as MainProvider handles it
 
-  const addToCart = useCallback((slabId: string) => { // Added type for slabId
-    if (!slabId) {
-      console.warn("Attempted to add an undefined SlabID to the cart.");
-      return;
+  const addToCart = useCallback(
+    (slabId: string) => {
+      // Added type for slabId
+      if (!slabId) {
+        console.warn("Attempted to add an undefined SlabID to the cart.");
+        return;
     }
-    setCartItems(prevItems => {
+      setCartItems((prevItems) => {
       if (!prevItems.includes(slabId)) {
         console.log(`useCart: Adding SlabID: ${slabId} to cart.`);
         return [...prevItems, slabId];

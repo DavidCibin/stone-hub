@@ -2,7 +2,7 @@
 import { useState, type ReactNode, useEffect } from "react"; // <-- Import useEffect
 import { type ErrorState, MainContext } from "./MainContext";
 
-const CART_STORAGE_KEY = 'cartSlabIDs'; // Define the key here or import from useCart
+const CART_STORAGE_KEY = "cartSlabIDs"; // Define the key here or import from useCart
 
 export const MainProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,10 +18,16 @@ export const MainProvider = ({ children }: { children: ReactNode }) => {
     try {
       const storedCartItems = localStorage.getItem(CART_STORAGE_KEY);
       // Log for debugging:
-      console.log("MainProvider: Initializing cart from localStorage:", storedCartItems);
+      console.log(
+        "MainProvider: Initializing cart from localStorage:",
+        storedCartItems,
+      );
       return storedCartItems ? JSON.parse(storedCartItems) : [];
     } catch (error) {
-      console.error("MainProvider: Error parsing cart items from localStorage on init:", error);
+      console.error(
+        "MainProvider: Error parsing cart items from localStorage on init:",
+        error,
+      );
       return [];
     }
   });

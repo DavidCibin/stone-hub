@@ -1,5 +1,10 @@
 import os
+<<<<<<< HEAD
 from fastapi import FastAPI
+=======
+from fastapi.requests import Request
+from fastapi import FastAPI, HTTPException, Query
+>>>>>>> 944f8ad655626de5c870b7bc94fe58e45ec7e058
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
