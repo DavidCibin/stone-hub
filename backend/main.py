@@ -1,4 +1,5 @@
 import os
+from fastapi.requests import Request
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
@@ -128,8 +129,6 @@ app.mount("/", StaticFiles(directory="dist", html=True), name="static")
 @app.get("/")
 async def serve_index():
     return FileResponse(os.path.join("dist", "index.html"))
-
-from fastapi.requests import Request
 
 @app.get("/{full_path:path}")
 async def catch_all(full_path: str):
