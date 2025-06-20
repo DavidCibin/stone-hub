@@ -6,7 +6,8 @@ from fastapi.staticfiles import StaticFiles
 from db.base import Base
 from db.session import engine
 
-from api import inventory, user, slab;
+from models import user, slab, inventory
+from api import inventory, user, slab, auth;
 
 Base.metadata.create_all(bind=engine)
 
@@ -32,6 +33,8 @@ app.add_middleware(
 app.include_router(inventory.router)
 app.include_router(user.router)
 app.include_router(slab.router)
+app.include_router(auth.router)
+
 
 # ✅ Serve frontend
 app.mount("/", StaticFiles(directory="dist", html=True), name="static")
