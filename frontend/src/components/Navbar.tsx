@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import { isLoggedIn, logoutUser } from "../hooks/authHelper";
 import closeIcon from "../../public/images/close.svg";
 import menuIcon from "../../public/images/menu.svg";
 import nhsLogo from "../../public/images/nsh-logo.svg";
@@ -10,6 +12,13 @@ function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isMobile } = useScreenContext();
   const { cartItems } = useMainContext();
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logoutUser();
+    navigate("/login");
+  };
 
   // Auto-close menu when switching from mobile to desktop
   useEffect(() => {
@@ -79,6 +88,15 @@ function Navbar() {
               </span>
             )}
           </Link>
+          {isLoggedIn() ? (
+            <button onClick={handleLogout} className="text-red-600 font-medium">
+              Logout
+            </button>
+          ) : (
+            <Link to="/login" className="text-blue-600 font-medium">
+              Login
+            </Link>
+          )}
         </nav>
       </div>
 
@@ -123,6 +141,24 @@ function Navbar() {
                   </span>
                 )}
               </Link>
+            </li>
+            <li>
+              {isLoggedIn() ? (
+                <button
+                  onClick={handleLogout}
+                  className="block py-2 text-red-600 font-medium"
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className="block py-2 text-blue-600 font-medium"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Login
+                </Link>
+              )}
             </li>
           </ul>
         </nav>

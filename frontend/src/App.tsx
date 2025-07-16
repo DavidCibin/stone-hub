@@ -1,5 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Inventory from "./pages/Inventory";
@@ -11,6 +13,7 @@ import Footer from "./components/Footer";
 import Loading from "./components/Loading";
 import ErrorBar from "./components/ErrorBar";
 
+import { useInactivityLogout } from "./hooks/useInactivityLogout";
 import { useMainContext } from "./context/MainContext";
 import { useEffect } from "react";
 import Contact from "./pages/Contact";
@@ -27,6 +30,8 @@ function App() {
     }
   }, [error, setError]);
 
+  useInactivityLogout();
+
   return (
     <div className="relative z-10 min-h-screen h-full flex flex-col">
       {isLoading && <Loading />}
@@ -42,6 +47,8 @@ function App() {
         )}
         <main className="flex flex-col flex-grow h-full overflow-unset lg:overflow-y-auto">
           <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="*" element={<Home />} />
             <Route path="/inventory" element={<Inventory />} />
             <Route path="/inventory/:param" element={<SlabDetailsPage />} />

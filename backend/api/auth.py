@@ -4,10 +4,11 @@ from models.user import User
 from schemas.user import UserCreate
 from core.security import hash_password, verify_password
 from core.auth import create_access_token, get_db
+from fastapi.security import OAuth2PasswordRequestForm
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
-@router.post("/register")
+@router.post("/signup")
 def register_user(user_data: UserCreate, db: Session = Depends(get_db)):
     existing = db.query(User).filter(User.email == user_data.email).first()
     if existing:
@@ -28,13 +29,13 @@ def register_user(user_data: UserCreate, db: Session = Depends(get_db)):
 
 
 @router.post("/token")
-def login_for_access_token(db: Session = Depends(get_db)):
-    from fastapi.security import OAuth2PasswordRequestForm
-    form_data = form_data(OAuth2PasswordRequestForm)
-
+def login_for_access_token(
+    form_data: OAuth2PasswordRequestForm = Depends(),  # ✅ Correct usage
+    db: Session = Depends(get_db)
+):
     user = db.query(User).filter(User.email == form_data.username).first()
     if not user or not verify_password(form_data.password, user.hashed_password):
         raise HTTPException(status_code=400, detail="Incorrect username or password")
-    
+
     token = create_access_token(data={"sub": user.email})
     return {"access_token": token, "token_type": "bearer"}

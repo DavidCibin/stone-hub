@@ -1,16 +1,16 @@
-import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+import os
+
 from db.base import Base
 from db.session import engine
-
 from models import user, slab, inventory
-from api import inventory, user, slab, auth;
+from api import inventory, user, slab, auth
 
+# ✅ Create DB tables
 Base.metadata.create_all(bind=engine)
-
 
 app = FastAPI()
 
@@ -29,16 +29,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ✅ Include routers
+# ✅ API Routers
 app.include_router(inventory.router)
 app.include_router(user.router)
 app.include_router(slab.router)
 app.include_router(auth.router)
 
+# ✅ Static files (served at /static)
+app.mount("/static", StaticFiles(directory="dist", html=True), name="static")
 
-# ✅ Serve frontend
-app.mount("/", StaticFiles(directory="dist", html=True), name="static")
-
+# ✅ Frontend SPA entry point
 @app.get("/")
 async def serve_index():
     return FileResponse(os.path.join("dist", "index.html"))
