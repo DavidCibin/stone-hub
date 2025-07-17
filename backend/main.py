@@ -6,8 +6,8 @@ import os
 
 from db.base import Base
 from db.session import engine
-from models import user, slab, inventory
-from api import inventory, user, slab, auth
+from models import user, inventory
+from api import inventory, user, auth
 
 # ✅ Create DB tables
 Base.metadata.create_all(bind=engine)
@@ -32,7 +32,6 @@ app.add_middleware(
 # ✅ API Routers
 app.include_router(inventory.router)
 app.include_router(user.router)
-app.include_router(slab.router)
 app.include_router(auth.router)
 
 # ✅ Static files (served at /static)

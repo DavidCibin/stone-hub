@@ -13,22 +13,22 @@ function SlabDetailsPage() {
   const { isLoading } = useMainContext();
   const { addToCart, isInCart, removeFromCart } = useCart();
 
-  const handleImagesPath = (slabId: string) => {
-    console.log(slabId);
+  const handleImagesPath = (id: string) => {
+    console.log(id);
 
     // Construct the relative path to the image within the assets folder
-    const imageRelativePath = `/src/assets/images/sub-slabs/${slabId}.jpg`;
+    const imageRelativePath = `/src/assets/images/sub-slabs/${id}.jpg`;
 
     // Use new URL and import.meta.url for Vite to correctly resolve the asset
     const imageUrl = new URL(imageRelativePath, import.meta.url).href;
     return imageUrl;
   };
 
-  const handleCartItems = (slabId: string) => {
-    if (isInCart(slabId)) {
-      removeFromCart(slabId);
+  const handleCartItems = (id: string) => {
+    if (isInCart(id)) {
+      removeFromCart(id);
     } else {
-      addToCart(slabId);
+      addToCart(id);
     }
   };
 
@@ -63,10 +63,10 @@ function SlabDetailsPage() {
           </div>
         </div>
         {slabs.map((slab) => (
-          <div key={slab.SlabID} className="grid md:grid-cols-2 gap-6">
+          <div key={slab.id} className="grid md:grid-cols-2 gap-6">
             <ModalImage
-              small={handleImagesPath(slab.SlabID.toLowerCase())}
-              large={handleImagesPath(slab.SlabID.toLowerCase())}
+              small={handleImagesPath(slab.id.toLowerCase())}
+              large={handleImagesPath(slab.id.toLowerCase())}
             />
             <div>
               <div>
@@ -75,7 +75,7 @@ function SlabDetailsPage() {
                     Finish:
                   </div>
                   <div className="table-cell border-b-gray-300 border-b pl-5">
-                    {slab.Finish}
+                    {slab.finish}
                   </div>
                 </div>
                 <div className="table-row">
@@ -83,20 +83,20 @@ function SlabDetailsPage() {
                     Thickness:
                   </div>
                   <div className="table-cell border-b-gray-300 border-b pl-5 pt-2">
-                    {slab.Thickness_Nominal}
+                    {slab.thicknessNominal}
                   </div>
                 </div>
                 <div className="table-row">
                   <div className="table-cell border-b-gray-300 border-b font-medium pb-1">
                     Dimensions:
                   </div>
-                  <div className="table-cell border-b-gray-300 border-b pl-5 pt-2">{`${Math.round(slab.Length_Actual * 39.3701)}″ x ${Math.round(slab.Width_Actual * 39.3701)}″`}</div>
+                  <div className="table-cell border-b-gray-300 border-b pl-5 pt-2">{`${Math.round(slab.lengthActual * 39.3701)}″ x ${Math.round(slab.widthActual * 39.3701)}″`}</div>
                 </div>
                 <div className="table-row">
                   <div className="table-cell border-b-gray-300 border-b font-medium pb-1">
                     Total Area:
                   </div>
-                  <div className="table-cell border-b-gray-300 border-b pl-5 pt-2">{`${Math.round(slab.UsableArea * 10.7639)} ft²`}</div>
+                  <div className="table-cell border-b-gray-300 border-b pl-5 pt-2">{`${Math.round(slab.usableArea * 10.7639)} ft²`}</div>
                 </div>
                 <div className="table-row">
                   <div className="table-cell border-b-gray-300 border-b font-medium pb-1">
@@ -111,7 +111,7 @@ function SlabDetailsPage() {
                     Item Id:
                   </div>
                   <div className="table-cell border-b-gray-300 border-b pl-5 pt-2">
-                    {slab.InventoryID}
+                    {slab.inventoryId}
                   </div>
                 </div>
                 <div className="table-row">
@@ -119,19 +119,19 @@ function SlabDetailsPage() {
                     Country of Origin:
                   </div>
                   <div className="table-cell pl-5 pt-2">
-                    {slab.Origin ? slab.Origin : "--"}
+                    {slab.origin ? slab.origin : "--"}
                   </div>
                 </div>
                 <div className="mt-4">
                   <button
-                    onClick={() => handleCartItems(slab.SlabID)}
+                    onClick={() => handleCartItems(slab.id)}
                     className={`px-6 py-2 rounded-md text-white font-semibold ${
-                      isInCart(slab.SlabID)
+                      isInCart(slab.id)
                         ? "bg-gray-400 hover:bg-gray-500"
                         : "bg-green-600 hover:bg-green-700"
                     }`}
                   >
-                    {isInCart(slab.SlabID) ? "Remove from Cart" : "Add to Cart"}
+                    {isInCart(slab.id) ? "Remove from Cart" : "Add to Cart"}
                   </button>
                 </div>
               </div>

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useMainContext } from "../context/MainContext";
-import { API_BASE_URL } from "../config"; // add this line
+import { API_BASE_URL } from "../config";
 
 export interface Slabs {
-  Material: string;
-  Name: string;
-  SlabID: string;
+  id: string;
+  material: string;
+  name: string;
   count: number;
   scColor: string;
   slug: string;
@@ -17,23 +17,24 @@ interface SlabState {
 }
 
 export interface SlabDetails {
-  SlabID: string;
-  InventoryID: string;
-  UsableArea: number;
-  Length_Actual: number;
-  Width_Actual: number;
-  Lot: string;
-  Name: string;
-  Origin: string | null;
-  Material: string;
-  Thickness_Nominal: string;
-  Finish: string;
+  id: string;
+  inventoryId: string;
+  usableArea: number;
+  lengthActual: number;
+  widthActual: number;
+  lot: string;
+  name: string;
+  origin: string | null;
+  material: string;
+  thicknessNominal: string;
+  finish: string;
   scColor: string;
   slug: string;
   colors: string[];
+  parentId: string;
 }
 
-interface SlabDetailstate {
+interface SlabDetailState {
   data: SlabDetails[];
 }
 
@@ -58,8 +59,8 @@ export function useSlabs() {
         const materials = [
           ...new Set(
             data
-              .filter((slab: SlabDetails) => slab.Material)
-              .map((slab: SlabDetails) => slab.Material.toLowerCase()),
+              .filter((slab: Slabs) => slab.material)
+              .map((slab: Slabs) => slab.material.toLowerCase()),
           ),
         ] as string[];
         setState({ data });
@@ -84,14 +85,12 @@ export function useSlabs() {
   return state;
 }
 
-export function useSlabDetails(param: string) {
+export function useSlabDetails(id: string) {
   const { setIsLoading, setError } = useMainContext();
 
-  const [state, setState] = useState<SlabDetailstate>({
+  const [state, setState] = useState<SlabDetailState>({
     data: [],
   });
-
-  const [slug, mat] = param.split("&");
 
   useEffect(() => {
     const fetchSlabDetails = async () => {
@@ -99,8 +98,7 @@ export function useSlabDetails(param: string) {
         setIsLoading(true);
         setState((prev) => ({ ...prev }));
         const query = new URLSearchParams({
-          slug,
-          mat,
+          id,
         });
 
         const response = await fetch(
@@ -132,7 +130,7 @@ export function useSlabDetails(param: string) {
     };
 
     fetchSlabDetails();
-  }, [slug, mat, setIsLoading, setError]);
+  }, [id, setIsLoading, setError]);
 
   return state;
 }

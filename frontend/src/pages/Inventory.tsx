@@ -32,7 +32,7 @@ export default function Inventory() {
 
     if (filters.name) {
       result = result.filter((s) =>
-        s.Name.toLowerCase().includes(filters.name.toLowerCase()),
+        s.name.toLowerCase().includes(filters.name.toLowerCase()),
       );
     }
 
@@ -40,16 +40,16 @@ export default function Inventory() {
       result = result.filter((s) =>
         filters.material
           .map((m) => m.toLowerCase())
-          .includes(s.Material.toLowerCase()),
+          .includes(s.material.toLowerCase()),
       );
     }
 
     switch (sort) {
       case "name-asc":
-        result.sort((a, b) => a.Name.localeCompare(b.Name));
+        result.sort((a, b) => a.name.localeCompare(b.name));
         break;
       case "name-desc":
-        result.sort((a, b) => b.Name.localeCompare(a.Name));
+        result.sort((a, b) => b.name.localeCompare(a.name));
         break;
       case "count-asc":
         result.sort((a, b) => a.count - b.count);
