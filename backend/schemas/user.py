@@ -1,3 +1,4 @@
+from uuid import UUID
 from pydantic import BaseModel, EmailStr
 from typing import Optional
 
@@ -9,7 +10,7 @@ class UserCreate(BaseModel):
     is_superuser: bool = False
 
 class UserOut(BaseModel):
-    id: int
+    id: UUID
     email: EmailStr
     first_name: Optional[str]
     last_name: Optional[str]
@@ -17,4 +18,4 @@ class UserOut(BaseModel):
     is_superuser: bool
 
     class Config:
-        form_attributes = True
+        orm_mode = True  # Fix this from `form_attributes`

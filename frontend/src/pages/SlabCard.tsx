@@ -6,13 +6,19 @@ interface Props {
 }
 
 function SlabCard({ slab }: Props) {
+  // Construct the relative path to the image within the assets folder
+  const imageRelativePath = `/src/assets/images/main-slabs/${slab.texture}.jpg`;
+
+  // Use new URL and import.meta.url for Vite to correctly resolve the asset
+  const imageUrl = new URL(imageRelativePath, import.meta.url).href;
+
   return (
     <Link
       to={`/inventory/${slab.slug}&${slab.Material}`}
       className="block rounded-b overflow-hidden shadow-xs hover:shadow-md transition"
     >
       <img
-        src={`https://slabcloud.com/scdata/textures/600/${slab.texture}.jpg`}
+        src={imageUrl}
         alt={slab.Name}
         className="w-full h-48 object-cover"
       />

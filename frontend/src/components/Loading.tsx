@@ -1,4 +1,4 @@
-import loadingIcon from "../../public/images/loading.svg";
+import loadingIcon from "../assets/images/loading.svg";
 
 /** ************************************************************** */
 /* Loading Component */

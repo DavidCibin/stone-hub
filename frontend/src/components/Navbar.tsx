@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { isLoggedIn, logoutUser } from "../hooks/authHelper";
-import closeIcon from "../../public/images/close.svg";
-import menuIcon from "../../public/images/menu.svg";
-import nhsLogo from "../../public/images/nsh-logo.svg";
+import closeIcon from "../assets/images/close.svg";
+import menuIcon from "../assets/images/menu.svg";
+import nhsLogo from "../assets/images/nsh-logo.svg";
 import { useScreenContext } from "../context/AppContext";
 import { useMainContext } from "../context/MainContext";
 
-function Navbar() {
+export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isMobile } = useScreenContext();
   const { cartItems } = useMainContext();
@@ -166,5 +166,3 @@ function Navbar() {
     </header>
   );
 }
-
-export default Navbar;

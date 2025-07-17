@@ -1,17 +1,18 @@
 from typing import List, Optional
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field
+from uuid import UUID
 
 class Slabs(BaseModel):
+    id: UUID
     Material: str
     Name: str
-    SlabID: str
     count: int
     scColor: str
     slug: str
     texture: str
 
 class SlabDetails(BaseModel):
-    SlabID: str
+    id: UUID
     InventoryID: str
     Length_Actual: float
     Width_Actual: float
@@ -25,15 +26,4 @@ class SlabDetails(BaseModel):
     scColor: str
     slug: str
     colors: List[str] = Field(default_factory=list)
-
-    sc1: Optional[str] = None
-    sc2: Optional[str] = None
-    sc3: Optional[str] = None
-    sc4: Optional[str] = None
-
-    @model_validator(mode="before")
-    @classmethod
-    def combine_colors(cls, data):
-        colors = [data.get("sc1"), data.get("sc2"), data.get("sc3"), data.get("sc4")]
-        data["colors"] = [c for c in colors if c]
-        return data
+    parent_id: UUID

@@ -45,7 +45,7 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
     background: transparent;
-    background-image: url("../public/images/caret-down.svg");
+    background-image: url("./assets/images/caret-down.svg");
     background-repeat: no-repeat;
     background-position-x: 0px;
     background-position-y: 10px;
