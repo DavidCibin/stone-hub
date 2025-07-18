@@ -13,17 +13,6 @@ function SlabDetailsPage() {
   const { isLoading } = useMainContext();
   const { addToCart, isInCart, removeFromCart } = useCart();
 
-  const handleImagesPath = (id: string) => {
-    console.log(id);
-
-    // Construct the relative path to the image within the assets folder
-    const imageRelativePath = `/src/assets/images/sub-slabs/${id}.jpg`;
-
-    // Use new URL and import.meta.url for Vite to correctly resolve the asset
-    const imageUrl = new URL(imageRelativePath, import.meta.url).href;
-    return imageUrl;
-  };
-
   const handleCartItems = (id: string) => {
     if (isInCart(id)) {
       removeFromCart(id);
@@ -65,8 +54,8 @@ function SlabDetailsPage() {
         {slabs.map((slab) => (
           <div key={slab.id} className="grid md:grid-cols-2 gap-6">
             <ModalImage
-              small={handleImagesPath(slab.id.toLowerCase())}
-              large={handleImagesPath(slab.id.toLowerCase())}
+              small={`/images/sub-slabs/${slab.id.toLowerCase()}.jpg`}
+              large={`/images/sub-slabs/${slab.id.toLowerCase()}.jpg`}
             />
             <div>
               <div>
