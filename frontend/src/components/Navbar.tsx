@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { isLoggedIn, logoutUser } from "../hooks/authHelper";
-import closeIcon from "../assets/images/close.svg";
-import menuIcon from "../assets/images/menu.svg";
-import nhsLogo from "../assets/images/nsh-logo.svg";
+// import closeIcon from "../assets/images/close.svg";
+// import menuIcon from "../assets/images/menu.svg";
+// import nhsLogo from "../assets/images/nsh-logo.svg";
 import { useScreenContext } from "../context/AppContext";
 import { useMainContext } from "../context/MainContext";
 
@@ -36,7 +36,7 @@ export default function Navbar() {
       <div className="mx-auto h-full px-4 py-3 flex items-center justify-between">
         <Link to="/">
           <img
-            src={nhsLogo}
+            src="/images/nsh-logo.svg"
             alt="Natural Stone Logo"
             className="h-13 hover:opacity-90"
           />
@@ -50,9 +50,9 @@ export default function Navbar() {
               aria-label="Toggle menu"
             >
               {isMenuOpen ? (
-                <img src={closeIcon} className="h-8" />
+                <img src="/images/close.svg" className="h-8" />
               ) : (
-                <img src={menuIcon} className="h-8" />
+                <img src="/images/menu.svg" className="h-8" />
               )}
             </div>
           </div>
