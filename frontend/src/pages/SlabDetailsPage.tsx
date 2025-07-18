@@ -5,9 +5,9 @@ import useCart from "../hooks/useCart";
 import ModalImage from "react-modal-image";
 
 function SlabDetailsPage() {
-  const { param } = useParams<{ param: string }>();
-  const { data: slabs } = useSlabDetails(param || "");
-  const [name, material] = (param ?? "").split("&");
+  const { id } = useParams<{ id: string }>();
+  const { data: slabs } = useSlabDetails(id || "");
+  const { name, material } = slabs[0] || {};
 
   const navigate = useNavigate();
   const { isLoading } = useMainContext();
@@ -125,11 +125,11 @@ function SlabDetailsPage() {
                 <div className="mt-4">
                   <button
                     onClick={() => handleCartItems(slab.id)}
-                    className={`px-6 py-2 rounded-md text-white font-semibold ${
+                    className={
                       isInCart(slab.id)
                         ? "bg-gray-400 hover:bg-gray-500"
-                        : "bg-green-600 hover:bg-green-700"
-                    }`}
+                        : undefined
+                    }
                   >
                     {isInCart(slab.id) ? "Remove from Cart" : "Add to Cart"}
                   </button>

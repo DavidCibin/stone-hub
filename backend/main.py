@@ -10,7 +10,7 @@ from models import user, inventory
 from api import inventory, user, auth
 
 # ✅ Create DB tables
-Base.metadata.create_all(bind=engine)
+# Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 

@@ -12,7 +12,7 @@ router = APIRouter()
 
 @router.get("/slabs", response_model=list[SlabsSchema])
 async def get_slabs(db: Session = Depends(get_db)):
-    slabs = db.query(Slabs).all()
+    slabs = db.query(Slabs).order_by(Slabs.name.asc()).all()
     return list(slabs)
 
 
